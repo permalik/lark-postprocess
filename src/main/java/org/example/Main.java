@@ -27,7 +27,6 @@ public class Main {
             while (true) {
                 String processedPrompt = consumer.consumeAndProcess();
                 if (processedPrompt != null) {
-<<<<<<< HEAD
                     responseDeliveryProducer.produce(
                         "new_responsedel",
                         processedPrompt
@@ -36,9 +35,6 @@ public class Main {
                         "new_feedback",
                         processedPrompt
                     );
-=======
-                    producer.produce("new_feedbackstb", processedPrompt);
->>>>>>> cffd8ee (feat: init)
                 }
 
                 Thread.sleep(100);

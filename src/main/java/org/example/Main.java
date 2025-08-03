@@ -3,8 +3,8 @@ package org.example;
 public class Main {
 
     public static void main(String[] args) {
-        InferenceResultConsumer consumer = new InferenceResultConsumer(
-            "inference.result"
+        FeedbackStubConsumer consumer = new FeedbackStubConsumer(
+            "feedback.stub"
         );
         ResponseDeliveryProducer responseDeliveryProducer =
             new ResponseDeliveryProducer("response.delivery");
@@ -21,12 +21,13 @@ public class Main {
                 })
             );
 
-        System.out.printf("Starting Postprocess..");
+        System.out.printf("Starting Feedback..");
 
         try {
             while (true) {
                 String processedPrompt = consumer.consumeAndProcess();
                 if (processedPrompt != null) {
+<<<<<<< HEAD
                     responseDeliveryProducer.produce(
                         "new_responsedel",
                         processedPrompt
@@ -35,6 +36,9 @@ public class Main {
                         "new_feedback",
                         processedPrompt
                     );
+=======
+                    producer.produce("new_feedbackstb", processedPrompt);
+>>>>>>> cffd8ee (feat: init)
                 }
 
                 Thread.sleep(100);

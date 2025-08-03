@@ -6,15 +6,18 @@ public class Main {
         InferenceResultConsumer consumer = new InferenceResultConsumer(
             "inference.result"
         );
-        ResponseDeliveryProducer producer = new ResponseDeliveryProducer(
-            "response.delivery"
+        ResponseDeliveryProducer responseDeliveryProducer =
+            new ResponseDeliveryProducer("response.delivery");
+        FeedbackStubProducer feedbackStubProducer = new FeedbackStubProducer(
+            "feedback.stub"
         );
 
         Runtime.getRuntime().addShutdownHook(
                 new Thread(() -> {
                     System.out.println("Shutting down..");
                     consumer.close();
-                    producer.close();
+                    responseDeliveryProducer.close();
+                    feedbackStubProducer.close();
                 })
             );
 
@@ -24,7 +27,14 @@ public class Main {
             while (true) {
                 String processedPrompt = consumer.consumeAndProcess();
                 if (processedPrompt != null) {
-                    producer.produce("new_responsedel", processedPrompt);
+                    responseDeliveryProducer.produce(
+                        "new_responsedel",
+                        processedPrompt
+                    );
+                    feedbackStubProducer.produce(
+                        "new_feedback",
+                        processedPrompt
+                    );
                 }
 
                 Thread.sleep(100);

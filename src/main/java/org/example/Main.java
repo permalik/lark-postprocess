@@ -3,8 +3,8 @@ package org.example;
 public class Main {
 
     public static void main(String[] args) {
-        FeedbackStubConsumer consumer = new FeedbackStubConsumer(
-            "feedback.stub"
+        InferenceResultConsumer consumer = new InferenceResultConsumer(
+            "inference.result"
         );
         ResponseDeliveryProducer responseDeliveryProducer =
             new ResponseDeliveryProducer("response.delivery");

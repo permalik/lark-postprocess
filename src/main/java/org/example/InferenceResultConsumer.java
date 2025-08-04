@@ -6,15 +6,15 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-public class FeedbackStubConsumer {
+public class InferenceResultConsumer {
 
     private final KafkaConsumer<String, String> consumer;
 
-    public FeedbackStubConsumer(String topic) {
+    public InferenceResultConsumer(String topic) {
         System.out.println("Initializing consumer..");
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "lark-feedback");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "lark-postprocess");
         props.put(
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
             StringDeserializer.class.getName()
